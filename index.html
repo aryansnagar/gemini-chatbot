@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="gemini-chatbot">
+  <meta name="keywords" content="gemini chatbot">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <title>Meerut Institute of Technology</title>
+  <style>
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    * {
+      margin: 0px 0px;
+      padding: 0px 0px;
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #ffffff;
+      color: #080808;
+    }
+
+    #chat-container {
+      margin: 0px auto;
+      padding: 20px 20px;
+      width: calc(70% - 40px);
+      background-color: #f0f0f0;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      font-family: "Inter";
+      width: fit-content;
+      height: fit-content;
+      margin-bottom: 20px;
+    }
+
+    form {
+      margin: 0px auto;
+      width: calc(100% - 0px);
+      height: fit-content;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    input {
+      margin: 0px 10px 0px 0px;
+      padding: 15px 30px;
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      border-radius: 50px;
+      background-color: #ffffff;
+    }
+
+    button {
+      margin: 0px 0px;
+      padding: 15px 30px;
+      width: fit-content;
+      height: fit-content;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      background-color: #3f3a7f;
+      color: #f0f0f0;
+      font-family: "Roboto Mono";
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+
+    #loader {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+
+    #chat-history {
+      width: 100%;
+      height: 400px;
+      overflow-y: scroll;
+    }
+
+    .user-message,
+    .bot-message {
+      margin: 0px 0px 5px 0px;
+      padding: 10px 10px;
+      width: fit-content;
+      height: fit-content;
+      border-radius: 10px;
+      max-width: 400px;
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+
+    .user-message {
+      margin: 0px 0px 0px auto;
+      text-align: right;
+      background-color: #f0f0f0;
+    }
+
+    .bot-message {
+      text-align: left;
+      background-color: #e0f0e0;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <div id="chat-container">
+    <h1>Meerut Institute of Technology</h1>
+    <div id="chat-history"></div>
+    <form id="chat-form">
+      <input type="text" id="user-input" placeholder="Enter your message">
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <div id="loader">
+    <img src="loader.gif" width="70px" alt="Loading...">
+  </div>
+
+  <script>
+    const chatHistory = document.getElementById('chat-history');
+    const userInput = document.getElementById('user-input');
+    const form = document.getElementById('chat-form');
+
+    async function sendMessage() {
+      const userMessage = userInput.value;
+      userInput.value = '';
+      console.log(userMessage)
+      try {
+        const response = await fetch('/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userInput: userMessage }),
+        });
+
+        const data = await response.json();
+        console.log(data)
+        const botMessage = data.response;
+        console.log(botMessage)
+        chatHistory.innerHTML += `<div class="user-message">${userMessage}</div>`;
+        chatHistory.innerHTML += `<div class="bot-message">${botMessage}</div>`;
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const loader = document.getElementById('loader');
+      loader.style.display = 'block';
+      sendMessage().finally(() => {
+        loader.style.display = 'none';
+      });;
+    });
+  </script>
+
+</body>
+</html>
