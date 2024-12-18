@@ -4,7 +4,7 @@
   "description": "gemini_chatbot",
   "main": "index.html",
   "engines" : {
-    "node": "22. x"
+    "node": "22.x"
   },
   "scripts": {
     "dev": "node server.js"
