@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cortana Reborn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- header -->
+    <header>
+        <h1>Cortana</h1>
+        <button id="save-pdf-button">Save as PDF</button>
+    </header>
+
+    <!-- input wrapper -->
+    <div id="input-wrapper">
+        <input id="input-bar" type="text" placeholder="On command, Press enter to send query.">
+    </div>
+
+    <!-- message list -->
+    <div id="message-list">
+        <ul id="messages">
+            <li id="user-me">User Message</li>
+            <li id="gemini-me">Gemini Message</li>
+        </ul>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

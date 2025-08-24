@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Mozilla+Headline:wdth,wght@75..125,200..700&family=Mozilla+Text:wght@200..700&display=swap');
+
+:root {
+    --background: #f3f3f3;
+    --background-secondary: #ececec;
+    --text: #0a0a0a;
+    --accent: #0000ff;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Mozilla Text", sans-serif;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+}
+
+header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding: 10px 20px;
+    width: calc(100% - 40px);
+    height: fit-content;
+    background: var(--background-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ababab;
+}
+
+header h1 {
+    padding: 8px 12px;
+    font-size: 24px;
+    font-weight: 600;
+    border-radius: 2px;
+    background: var(--accent);
+    color: var(--background);
+    cursor: pointer;
+}
+
+#save-pdf-button {
+    padding: 14px 20px;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 400;
+    background: none;
+    border: 1px solid #aeaeae;
+    margin: 0px 0px 0px 10px;
+    color: var(--text);
+}
+
+#input-wrapper {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    padding: 5px 0px;
+    width: calc(100%);
+    height: fit-content;
+    background: var(--background-secondary);
+    border-top: 1px solid #ababab;
+}
+
+#input-wrapper input {
+    padding: 15px 20px;
+    width: calc(100% - 40px);
+    height: fit-content;
+    border: none;
+    outline: none;
+    background: none;
+    color: var(--text);
+    font-size: 16px;
+}
+
+::placeholder {
+    color: #4a4a4a;
+}
+
+#message-list {
+    padding: 20px 0px;
+    margin: 65px auto 0px auto;
+    height: fit-content;
+    width: calc(100%);
+    overflow-x: scroll;
+}
+
+#message-list ul {
+    display: flex;
+    flex-direction: column;
+}
+
+#message-list ul li {
+    list-style: none;
+    padding: 15px 20px;
+    width: calc(100% - 40px);
+    height: fit-content;
+    font-size: 16px;
+}
+
+#gemini-me {
+    background-color: var(--background-secondary);
+}
